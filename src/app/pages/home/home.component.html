@@ -3,32 +3,28 @@
   <h6>browse various ongoing events</h6>
 </section>
 
-<section class="bg-light">
-  <ul class="upcoming-event">
-    <li>
-      <h6>Day 1</h6>
-      <p class="m-0">NOv 04, 2023</p>
-    </li>
-    <li>
-      <h6>Day 1</h6>
-      <p class="m-0">NOv 04, 2023</p>
-    </li>
-    <li>
-      <h6>Day 1</h6>
-      <p class="m-0">NOv 04, 2023</p>
-    </li>
-    <li>
-      <h6>Day 1</h6>
-      <p class="m-0">NOv 04, 2023</p>
-    </li>
-    <li>
-      <h6>Day 1</h6>
-      <p class="m-0">NOv 04, 2023</p>
-    </li>
-  </ul>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4"><input type="search" placeholder="search by organizer" class="form-control"
+        [(ngModel)]="searchText">
+    </div>
+    <div class="col-sm-4">
+      <select name="" id="" class="form-select">
+        <option value="" selected>location</option>
+      </select>
+    </div>
+    <div class="col-sm-4">
+      <select name="" id="" class="form-select" [(ngModel)]="searchPrice">
+        <option value="" selected>price</option>
+        <option value="200">Below 200</option>
+        <option value="500">Below 500</option>
+        <option value="800">Below 800</option>
+      </select>
+    </div>
+  </div>
 </section>
 
-<section class="my-5 bg-light" *ngFor="let event of events">
+<section class="my-5 bg-light" *ngFor="let event of events | filter:searchText | filter:searchPrice">
   <div class="container-fluid">
     <div class="w-100 p-3 d-flex align-items-center justify-content-between">
       <div class="col-3">

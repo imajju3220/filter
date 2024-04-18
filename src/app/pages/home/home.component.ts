@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  searchText: any;
+  searchPrice: any;
   events: any[] = [];
   bookingObj: any = {
     "BookingId": 0,
@@ -86,5 +88,10 @@ export class HomeComponent implements OnInit {
         alert('alert.message')
       }
     })
+  }
+
+  onPriceChange(event: any) {
+    var price = event.target.value;
+    this.events = this.events.filter(x => x.price < price);
   }
 }
