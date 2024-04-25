@@ -5,24 +5,49 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]): any {
-    if (value.length == 0) {
-      return null
+  transform(value: any, searchText: string, searchPrice: number, searchLocation: string): any {
+    if (!value || !value.length) {
+      return null;
     }
 
-    const searchString = args.toString().toLowerCase();
-    debugger
-    var returnValue = value.filter(function (item: any) {
-      var searchValue = JSON.stringify(item.organizerName).toLowerCase().includes(searchString) || item.price < searchString;
-      return searchValue;
-    });
+    let filteredEvents = value;
 
-    if (returnValue.length == 0) {
+    // Filter by organizer name
+    if (searchText) {
+      filteredEvents = filteredEvents.filter((event: any) =>
+        event.organizerName.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    // Filter by price
+    if (searchPrice != 0) {
+      if (searchPrice <= 100) {
+        filteredEvents = filteredEvents.filter((event: any) =>
+          event.price < searchPrice
+        );
+      }
+
+      if (searchPrice >= 250) {
+        filteredEvents = filteredEvents.filter((event: any) =>
+          event.price > searchPrice
+        );
+      }
+    }
+
+
+    if (filteredEvents.length === 0) {
       alert('No result found');
     }
 
-    return returnValue;
+    //Filter by location
+    if (searchLocation) {
+      filteredEvents = filteredEvents.filter((event: any) =>
+        event.location.toLowerCase().includes(searchLocation.toLowerCase())
+      );
+    }
 
+
+    return filteredEvents;
   }
 
 }

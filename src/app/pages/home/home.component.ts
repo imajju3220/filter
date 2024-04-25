@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   searchText: any;
   searchPrice: any;
+  searchLocation: any;
   events: any[] = [];
   bookingObj: any = {
     "BookingId": 0,
@@ -60,6 +61,8 @@ export class HomeComponent implements OnInit {
     this.http.get('https://freeapi.gerasim.in/api/EventBooking/GetAllEvents').subscribe((res: any) => {
       this.events = res.data;
     });
+    this.searchPrice = 0;
+    this.searchLocation = 0;
   }
 
   bookNow(event: any) {
